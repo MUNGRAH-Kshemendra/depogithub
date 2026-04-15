@@ -1,7 +1,8 @@
 pipline {
     agent any
         stages {
-            stages {
+            stages('Clean mon projet') {
+                steps {
                 cleanWs()
             }
         }
