@@ -20,6 +20,7 @@ pipeline {
         stage('Install Docker.io') {
             steps {
                 sh '''
+                sudo apt autoremove docker.io docker-compose -y
                 sudo apt update
                 sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
 
@@ -32,5 +33,6 @@ pipeline {
                 '''
             }
         }
+    
     }
 }
