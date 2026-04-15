@@ -3,7 +3,7 @@ pipeline {
 
     stages {
 
-        stage('Clean mon projet') {
+        stage('Clean workspace') {
             steps {
                 cleanWs()
             }
@@ -17,31 +17,32 @@ pipeline {
             }
         }
 
-        stage('Install Docker.io') {
+        stage('Reset Docker (optional)') {
             steps {
                 sh '''
-                sudo apt autoremove docker.io docker-compose -y
-                sudo apt update
-                sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
-
-                sudo apt install -y docker.io
-
-                sudo systemctl status docker.service
-
-                sudo chmod 666 /var/run/docker.sock
-                sudo usermod -aG docker jenkins
+                sudo apt remove -y docker.io docker-compose
+                sudo apt autoremove -y
                 '''
             }
         }
-        stage('Test create conteneur') {
-        steps {
-            sh '''
-            sudo docker images ls
-            sudo docker ps
-            sudo docker run -d --name conteneur01 --hostname conteneur01 ubuntu/apache2
-            sudo docker ps
-            '''
+
+        stage('Install Docker') {
+            steps {
+                sh '''
+                sudo apt update
+                sudo apt install -y docker.io
+                sudo systemctl start docker
+                '''
             }
+        }
+
+        stage('Run Container') {
+            steps {
+                sh '''
+                docker run -d --name conteneur01 -p 8080:80 httpd
+                docker ps
+                '''
+            }
+        }
     }
-}
 }
