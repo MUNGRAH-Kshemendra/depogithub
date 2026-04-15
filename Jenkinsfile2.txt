@@ -5,6 +5,12 @@ pipline {
                 cleanWs()
             }
         }
+        stage('CkeckOut SCM'){
+            steps{
+                git branch: 'main', credentialsId: 'kshemendra-github-token', url: 'https://github.com MUNGRAH-Kshemendra/depogithub.git'
+                    }
+                }
+    
         stages('Cloner le Github'){
             steps{
                 sh 'sudo apt autoremove docker.io docker-compose -y'
