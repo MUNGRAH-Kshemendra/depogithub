@@ -2,16 +2,11 @@ pipeline {
     agent any
     stages {
 
-        stage('Clean') {
+        stage('Checkout') {
             steps {
-                cleanWs()
+                checkout scm
             }
         }
 
-        stage('Clone Repo') {
-            steps {
-                sh "git clone https://github.com/MUNGRAH-Kshemendra/depogithub.git"
-            }
-        }
     }
 }
