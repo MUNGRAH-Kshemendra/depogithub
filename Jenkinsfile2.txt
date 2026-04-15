@@ -33,6 +33,14 @@ pipeline {
                 '''
             }
         }
-    
+        stage('Test create conteneur') {
+        steps {
+            sh '''
+            sudo docker images ls
+            sudo docker ps
+            sudo docker run -d --name conteneur01 --hostname conteneur01 ubuntu/apache2
+            sudo docker ps
+            '''
+            }
     }
 }
