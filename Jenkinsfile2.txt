@@ -6,12 +6,12 @@ pipline {
                 cleanWs()
             }
         }
-        stage('CkeckOut SCM'){
+        stage('CkeckOut SCM') {
             steps {
-            // git branch: 'main', credentialsId: 'kshemendra-github-token', url: 'https://github.com MUNGRAH-Kshemendra/depogithub.git'
+                git branch: 'main', credentialsId: 'kshemendra-github-token', url: 'https://github.com MUNGRAH-Kshemendra/depogithub.git'
                 }
             }    
-        stages('Install Docker.io'){
+        stages('Install Docker.io') {
             steps {
                 sh 'sudo apt autoremove docker.io docker-compose -y'
                 sh 'sudo apt update'
