@@ -1,15 +1,16 @@
 pipeline {
     agent any
     stages {
-        stage('Clean mon projet') {
+
+        stage('Clean') {
             steps {
                 cleanWs()
             }
         }
-        stage('CkeckOut SCM') {
+
+        stage('Clone Repo') {
             steps {
-            sh "git clone https://github.com/MUNGRAH-Kshemendra/depogithub.git"
-            git branch: 'main', credentialsId: 'root', url: 'https://github.com/MUNGRAH-Kshemendra/depogithub.git'
+                sh "git clone https://github.com/MUNGRAH-Kshemendra/depogithub.git"
             }
         }
     }
