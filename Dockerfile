@@ -1,5 +1,4 @@
 FROM ubuntu:latest
-
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Installation des paquets
