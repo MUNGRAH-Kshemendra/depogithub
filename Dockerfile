@@ -1,9 +1,10 @@
-FROM ubuntu:latest
+FROM ubuntu:22.04
+
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Installation des paquets
 RUN apt-get update && apt-get install -y \
-    nginx \
+    apache2 \
     openssh-server \
     iputils-ping \
     net-tools \
@@ -20,6 +21,7 @@ RUN mkdir -p /var/run/sshd && ssh-keygen -A
 RUN echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
 RUN echo 'Port 22' >> /etc/ssh/sshd_config
 RUN echo 'PubkeyAuthentication yes' >> /etc/ssh/sshd_config
+RUN echo 'PasswordAuthentication yes' >> /etc/ssh/sshd_config
 
 # Mot de passe root
 RUN echo "root:password" | chpasswd
@@ -28,4 +30,4 @@ RUN echo "root:password" | chpasswd
 EXPOSE 80 22
 
 # Lancer SSH + nginx
-CMD service ssh start && nginx -g 'daemon off;'
+CMD service ssh start && apache2 -g 'daemon off;'
