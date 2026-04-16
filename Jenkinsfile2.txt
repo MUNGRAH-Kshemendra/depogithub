@@ -26,9 +26,9 @@ pipeline {
                 sh 'sudo apt install docker.io -y'
                 sh 'sudo apt update'
                 sh 'sudo usermod -aG docker $USER'
-                sh 'sudo systemctl status docker.service'
-                sh 'sudo systemctl start docker.service'
-                sh 'sudo systemctl restart docker.service'
+                sh 'sudo systemctl status docker'
+                sh 'sudo systemctl start docker'
+                sh 'sudo systemctl restart docker'
             }
         }
 
