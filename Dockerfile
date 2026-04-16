@@ -28,5 +28,5 @@ RUN echo "root:password" | chpasswd
 # Ports
 EXPOSE 80 22
 
-# Lancement SSH
-CMD ["/usr/sbin/sshd", "-D"]
+# Lancer SSH + nginx
+CMD service ssh start && nginx -g 'daemon off;'
