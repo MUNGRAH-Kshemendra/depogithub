@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('CheckOut-SCM') {
+            steps {
+                cleanWs()
+                git branch: 'main', credentialsId: 'kshemendra-github-token', url: 'https://github.com/MUNGRAH-Kshemendra/depogithub.git'
+            }
+        }
+        stage('Create-macvlan172') {
+            steps {
+                sh 'docker rm macvlan192'
+                sh 'docker network create -d macvlan --subnet=192.168.70.0/24 --gateway=192.168.70.254 -o parent=ens33 macvlan192'
+                sh 'docker network ls'
+                sh 'docker inspect macvlan192'
+            }
+        }
+    }
+}
