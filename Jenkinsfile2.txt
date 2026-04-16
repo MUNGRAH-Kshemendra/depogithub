@@ -34,11 +34,9 @@ pipeline {
 
         stage('Run Container') {
             steps {
-                sh 'docker image ls'
                 sh 'docker ps'
                 sh 'docker pull ubuntu:latest'
                 sh 'sudo docker run -d --name conteneur01 --hostname conteneur01 ubuntu:latest'
-                sh 'docker ps'
             }
         }
     }
