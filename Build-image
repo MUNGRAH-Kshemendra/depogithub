@@ -12,7 +12,7 @@ pipeline {
 
          stage('Build-image-nginx') {
              steps {
-             sh 'docker build -t mon-nginx .'
+             sh 'docker build -t mon-apache .'
              }
          }
      }
