@@ -1,0 +1,36 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Clean mon projet') {
+            steps {
+                cleanWs()
+            }
+        }
+
+        stage('Checkout SCM') {
+            steps {
+                git branch: 'main',
+                    credentialsId: 'kshemendra-github-token',
+                    url: 'https://github.com/MUNGRAH-Kshemendra/depogithub.git'
+            }
+        }
+
+        stage('Install Docker.io') {
+            steps {
+                sh '''
+                sudo apt update
+                sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
+
+                sudo apt install -y docker.io
+
+                sudo systemctl status docker.service
+
+                sudo chmod 666 /var/run/docker.sock
+                sudo usermod -aG docker jenkins
+                '''
+            }
+        }
+    }
+}
