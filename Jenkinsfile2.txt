@@ -36,7 +36,7 @@ pipeline {
             steps {
                 sh 'docker image ls'
                 sh 'docker ps'
-                sh 'sudo docker run -d --name conteneur01 --hotname conteneur01 ubuntu/apache2'
+                sh 'sudo docker run -d --name conteneur01 --hotname conteneur01 -p 8080:80 httpd'
                 sh 'docker ps'
             }
         }
