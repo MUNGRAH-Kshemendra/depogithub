@@ -26,7 +26,6 @@ pipeline {
                 sh 'sudo apt install docker.io -y'
                 sh 'sudo apt update'
                 sh 'sudo usermod -aG docker jenkins'
-                sh 'sudo systemctl status docker'
                 sh 'sudo systemctl start docker'
             }
         }
