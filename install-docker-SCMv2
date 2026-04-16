@@ -25,6 +25,7 @@ pipeline {
                 sh 'sudo apt install apt-transport-https ca-certificates curl software-properties-common -y'
                 sh 'sudo apt install docker.io -y'
                 sh 'sudo apt update'
+                sh 'sudo apt upgrade -y'
                 sh 'sudo usermod -aG docker jenkins'
                 sh 'sudo systemctl start docker'
                 sh 'sudo systemctl restart docker'
