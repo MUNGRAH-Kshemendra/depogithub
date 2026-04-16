@@ -3,6 +3,11 @@ pipeline {
     stages {
         stage('ChekOut-SCM') {
           steps {
-              cleanWs()
+            cleanWs()
+            git branch: 'main', credentialsId: 'kshemendra-github-token', url: 'https://github.com/MUNGRAH-Kshemendra/depogithub.git'
+        }
+    }
+    stage('Create-macvlan192') {
+        steps {
+            sh 'docker stop contapache01 && docker rm contapache01'
             
-              
