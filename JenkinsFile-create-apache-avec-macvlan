@@ -4,4 +4,18 @@ pipeline {
         stage('ChekOut-SCM') {
           steps {
               cleanWs()
-              
+              git branch: 'main', credentialsId: 'kshemendra-github-token', url: 'https://github.com/MUNGRAH-Kshemendra/depogithub.git'
+                }
+            }
+        stage('Create-conteneur) {
+            steps {
+                sh 'docker stop contapache01 && docker rm contapache01'
+                sh 'docker run -d --name contapache01 -v ./volumecontapache01:/var/www/html --network macvlan192 --ip 192.168.70.20 mon-apache2
+                sh 'docker start contapache01'
+                sh 'docker exec contapache01 service ssh start'
+                sh 'docker exec contapache01 /etc/init.d/apache2 start'
+                sh 'docker exec contapache01 /etc/init.d/apache2 status'
+            }
+        }
+    }
+}
