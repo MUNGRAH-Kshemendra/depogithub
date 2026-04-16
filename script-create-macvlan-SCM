@@ -8,7 +8,7 @@ pipeline {
                 git branch: 'main', credentialsId: 'kshemendra-github-token', url: 'https://github.com/MUNGRAH-Kshemendra/depogithub.git'
             }
         }
-        stage('Create-macvlan172') {
+        stage('Create-macvlan192') {
             steps {
                 sh 'docker rm macvlan192'
                 sh 'docker network create -d macvlan --subnet=192.168.70.0/24 --gateway=192.168.70.254 -o parent=ens33 macvlan192'
