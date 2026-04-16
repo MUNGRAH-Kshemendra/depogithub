@@ -32,6 +32,13 @@ pipeline {
             }
         }
 
+        stage('Remove old container if exists') {
+            steps {
+                sh 'docker stop conteneur01 || true'
+                sh 'docker rm conteneur01 || true'
+            }
+        }
+
         stage('Run Container') {
             steps {
                 sh 'docker ps'
